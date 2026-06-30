@@ -73,23 +73,15 @@ public class Hunter
     {
         private static void SetBarValue(UiProgressBar bar, int meterHits, int maxHits)
         {
-            var result = meterHits / (float)maxHits;
-            bar.SetValueInstant(result);
-            RebalancePlugin.Logger.LogInfo($"{meterHits} / {maxHits} = {result}");
+            bar.SetValueInstant(meterHits / (float)maxHits);
         }
 
         private static void SetAnim(BindOrbHudFrame frame, string fullAnimA, bool wasFullExtra)
         {
-            if (frame == null)
-                RebalancePlugin.Logger.LogError("Frame is null");
-            else
-            {
-                if (!wasFullExtra)
-                    return; 
-                frame.PlayFrameAnim(fullAnimA); 
-                RebalancePlugin.Logger.LogInfo($"Playing {fullAnimA}"); 
-            }
-            
+            if (frame == null || !wasFullExtra)
+                return;
+            frame.PlayFrameAnim(fullAnimA); 
+            RebalancePlugin.Logger.LogInfo($"Playing {fullAnimA}"); 
         }
 
         // Harmonize (as of 1.0.6) does not let this compile, so that can't be used
