@@ -15,3 +15,5 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 ### Tools
 #### Shard Pendant
 - Most bosses drop (100) shards upon death (may need testing)
+#### Weighted Belt
+- No more attack recoil
