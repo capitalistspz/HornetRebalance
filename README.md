@@ -34,3 +34,5 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 - ~~Precent drops from being destroyed by spikes, and attract them early~~ (having trouble with this)
 ### Silkspeed Anklets
 - No longer requires or consumes silk
+### Ascendant's Grip
+- Increases attack range while on wall
