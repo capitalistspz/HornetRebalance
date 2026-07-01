@@ -32,7 +32,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 - Attract shards too
 - Collect when exiting scene
 - ~~Precent drops from being destroyed by spikes, and attract them early~~ (having trouble with this)
-### Silkspeed Anklets
+#### Silkspeed Anklets
 - No longer requires or consumes silk
-### Ascendant's Grip
+#### Ascendant's Grip
 - Increases attack range while on wall
