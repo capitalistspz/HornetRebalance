@@ -18,7 +18,7 @@ public static class Extensions
                 else
                 {
                     var ts = obj.transform.Find(goPath[(sepIndex + 1)..]);
-                    return ts.gameObject;
+                    return ts == null ? null : ts.gameObject;
                 }
             }
         }
@@ -28,7 +28,7 @@ public static class Extensions
 
     public static GameObject? FindChildByPath(this GameObject gameObject, string path)
     {
-        return gameObject.transform.Find(path).gameObject;
+        var ts = gameObject.transform.Find(path);
+        return ts == null ? null : ts.gameObject;
     }
-    
 }
