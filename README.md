@@ -65,5 +65,10 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 - Makes hornet invulnerable instead of the attack-type dependent evasion
 
 ### Druid's Eye/Druid's Eyes
+
 - Also takes effect when enemy is killed
 - Gives 3 (Druid's Eye) or 4 (Druid's Eyes) moss pips per enemy killed
+
+### Warding Bell
+
+- Refunds 6 silk when burst
