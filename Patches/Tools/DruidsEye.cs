@@ -11,11 +11,10 @@ public static class DruidsEye
 {
     private const int DruidsEyePips = 3;
     private const int DruidsEyesPips = 4;
-    
 
     [HarmonyPatch(typeof(HeroController), nameof(HeroController.DoMossToolHit))]
     [HarmonyTranspiler]
-    public static IEnumerable<CodeInstruction> IncreaseMossPips(IEnumerable<CodeInstruction> instructions)
+    private static IEnumerable<CodeInstruction> IncreaseMossPips(IEnumerable<CodeInstruction> instructions)
     {
         var match = new CodeMatcher(instructions)
             .MatchForward(false,
@@ -35,7 +34,7 @@ public static class DruidsEye
 
     [HarmonyPatch(typeof(EnemyDeathEffects), nameof(EnemyDeathEffects.RecordKillForJournal))]
     [HarmonyPrefix]
-    public static void GetMossPipsOnEnemyKill(EnemyDeathEffects __instance)
+    private static void GetMossPipsOnEnemyKill(EnemyDeathEffects __instance)
     {
         var hm = __instance.GetComponent<HealthManager>();
         if (hm == null || !hm.WillAwardJournalKill)
