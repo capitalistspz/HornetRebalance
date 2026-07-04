@@ -59,3 +59,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 #### Ascendant's Grip
 
 - Increases attack range while on wall
+
+### Scuttle Brace
+
+- Makes hornet invulnerable instead of the attack-type dependent evasion
