@@ -10,6 +10,7 @@ public partial class RebalancePlugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger = null!;
     private Harmony? _harmony;
+
     private void Awake()
     {
         RebalancePlugin.Logger = base.Logger;

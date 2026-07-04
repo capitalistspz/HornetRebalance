@@ -15,7 +15,7 @@ public static class ExtendedAccessTools
     {
         RebalancePlugin.Logger.LogWarning(msg);
     }
-    
+
     // Get get the type of an enumerator via its method
     // Mostly copied from the Harmony's `AccessTools.EnumeratorMoveNext`
     public static Type? EnumeratorType(MethodInfo? enumerator)
@@ -25,6 +25,7 @@ public static class ExtendedAccessTools
             LogWarn("EnumeratorType.Method: enumerator is null");
             return null;
         }
+
         var context = new ILContext(new DynamicMethodDefinition(enumerator).Definition);
         var ilCursor = new ILCursor(context);
         if (context.Method.ReturnType.Name.StartsWith("UniTask"))
@@ -43,9 +44,11 @@ public static class ExtendedAccessTools
                 LogWarn($"EnumeratorType.Method: {enumerator.FullDescription()} does not create enumerators");
                 return null;
             }
-            if (enumeratorCtor.Name == ".ctor") 
+
+            if (enumeratorCtor.Name == ".ctor")
                 return enumeratorCtor.DeclaringType.ResolveReflection();
-            LogWarn($"EnumeratorType.Method: {enumerator.FullDescription()} does not create an enumerator (got {enumeratorCtor.GetID(simple: true)})");
+            LogWarn(
+                $"EnumeratorType.Method: {enumerator.FullDescription()} does not create an enumerator (got {enumeratorCtor.GetID(simple: true)})");
         }
 
         return null;
