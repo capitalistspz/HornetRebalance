@@ -59,8 +59,7 @@ public static class FsmMutatorPatch
         {
             foreach (var mutator in mutators)
             {
-                
-                RebalancePlugin.Logger.LogDebug($"Applied mutator '{mutator.Method.DeclaringType!.Name}{mutator.Method.Name}' to {__instance.gameObject.name}: {__instance.FsmName}");
+                RebalancePlugin.Logger.LogDebug($"Applying mutator '{mutator.Method.DeclaringType!.Name}.{mutator.Method.Name}' to {__instance.gameObject.name}: {__instance.FsmName}");
                 mutator(__instance.fsm);
             }
             __instance.fsm.AddBoolVariable(MutationTagVarName);

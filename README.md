@@ -97,3 +97,8 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 ### Multibinder
 
 - Bind time reduced
+
+### Injector Band
+
+- Bind time further reduced
+- Now applies to Architect's craft bind
