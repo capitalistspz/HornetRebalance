@@ -5,6 +5,7 @@ using System.Reflection;
 using HarmonyLib;
 using HutongGames.PlayMaker;
 using Rebalance.FsmUtils;
+using Silksong.FsmUtil;
 
 namespace Rebalance.Patches;
 
@@ -13,37 +14,44 @@ public static class FsmMutatorPatch
 {
     private static Dictionary<(string, string), Action<Fsm>>? _mutators;
 
-    [HarmonyPatch(typeof(PlayMakerFSM), nameof(PlayMakerFSM.Start))]
+    private const string MutationTagVarName = "Rebalance - Mutated"; 
+
+    private static Dictionary<(string, string), Action<Fsm>> CollectMutators()
+    {
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+        var mutators = new Dictionary<(string, string), Action<Fsm>>();
+        var assembly = Assembly.GetExecutingAssembly();
+        foreach (var type in assembly.GetTypes())
+        {
+            foreach (var method in type.GetMethods())
+            {
+                foreach (var attr in method.GetCustomAttributes<FsmMutatorAttribute>())
+                {
+                    mutators.Add((attr.ObjectName, attr.FsmName), (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method));
+                }
+            }
+        }
+        stopwatch.Stop();
+        RebalancePlugin.Logger.LogInfo($"Collected {mutators.Count} fsm mutators in {stopwatch.ElapsedMilliseconds} ms");
+        return mutators;
+    }
+
+    [HarmonyPatch(typeof(PlayMakerFSM), nameof(PlayMakerFSM.OnEnable))]
     [HarmonyPrefix]
     public static void OnFsmStart(PlayMakerFSM __instance)
     {
-        // Warning: Hornet FSMs come already started
-        if (__instance.fsm.Started)
+        _mutators ??= CollectMutators();
+        
+        // A tag variable
+        if (__instance.fsm.FindBoolVariable(MutationTagVarName) != null)
             return;
-        if (_mutators == null)
-        {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            _mutators = new Dictionary<(string, string), Action<Fsm>>();
-            var assembly = Assembly.GetExecutingAssembly();
-            foreach (var type in assembly.GetTypes())
-            {
-                foreach (var method in type.GetMethods())
-                {
-                    foreach (var attr in method.GetCustomAttributes<FsmMutatorAttribute>())
-                    {
-                        _mutators.Add((attr.ObjectName, attr.FsmName), (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method));
-                    }
-                }
-            }
-            stopwatch.Stop();
-            
-            RebalancePlugin.Logger.LogInfo($"Collected {_mutators.Count} fsm mutators in {stopwatch.ElapsedMilliseconds} ms");
-        }
 
         if (_mutators.TryGetValue((__instance.gameObject.name, __instance.FsmName), out var mutator))
         {
+            RebalancePlugin.Logger.LogDebug($"Applied mutation to {__instance.gameObject.name}:{__instance.FsmName}");
             mutator(__instance.fsm);
+            __instance.fsm.AddBoolVariable(MutationTagVarName);
         }
     }
 }
