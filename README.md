@@ -84,3 +84,8 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 - Purple masks no longer expire on a timer
 - As the timer is gone, Plasmium overdose is now possible (behaves the same as regular plasmium overdose, has no extra special effects)
 - Needle attacks while having purple masks inflict venom (like the Flintslate synergy, but with default needle damage)
+
+### Sawtooth Circlet
+
+- Volume halved (Does not reduce the volume of the circlet colliding with things)
+- No longer collides with bounce pods (Hunter's March red pea pods, Shellwood white flowers...)
