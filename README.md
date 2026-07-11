@@ -89,3 +89,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 
 - Volume halved (Does not reduce the volume of the circlet colliding with things)
 - No longer collides with bounce pods (Hunter's March red pea pods, Shellwood white flowers...)
+
+### Fractured Mask
+
+- Recovers after binding
