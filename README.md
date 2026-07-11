@@ -72,3 +72,15 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 ### Warding Bell
 
 - Refunds 6 silk when burst
+
+### Pollip Pouch
+
+**Flintslate Synergy**
+
+- Attacks do the same damage as regular flintslate (1.5x instead of 1.3x)
+
+**Plasmium Phial Synergy**
+
+- Purple masks no longer expire on a timer
+- As the timer is gone, Plasmium overdose is now possible (behaves the same as regular plasmium overdose, has no extra special effects)
+- Needle attacks while having purple masks inflict venom (like the Flintslate synergy, but with default needle damage)
