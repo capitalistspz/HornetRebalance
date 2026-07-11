@@ -102,3 +102,8 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 
 - Bind time further reduced
 - Now applies to Architect's craft bind
+
+### Spool Extender
+
+- Any strand that enters the spool extender fills the entire extender
+
