@@ -12,15 +12,15 @@ namespace Rebalance.Patches;
 [HarmonyPatch]
 public static class FsmMutatorPatch
 {
-    private static Dictionary<(string, string), Action<Fsm>>? _mutators;
+    private static Dictionary<(string, string), List<Action<Fsm>>>? _mutators;
 
     private const string MutationTagVarName = "Rebalance - Mutated"; 
 
-    private static Dictionary<(string, string), Action<Fsm>> CollectMutators()
+    private static Dictionary<(string, string), List<Action<Fsm>>> CollectMutators()
     {
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        var mutators = new Dictionary<(string, string), Action<Fsm>>();
+        var mutators = new Dictionary<(string, string), List<Action<Fsm>>>();
         var assembly = Assembly.GetExecutingAssembly();
         foreach (var type in assembly.GetTypes())
         {
@@ -28,7 +28,15 @@ public static class FsmMutatorPatch
             {
                 foreach (var attr in method.GetCustomAttributes<FsmMutatorAttribute>())
                 {
-                    mutators.Add((attr.ObjectName, attr.FsmName), (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method));
+                    var mutator = (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method);
+                    if (mutators.TryGetValue((attr.ObjectName, attr.FsmName), out var list))
+                    {
+                        list.Add(mutator);   
+                    }
+                    else
+                    {
+                        mutators.Add((attr.ObjectName, attr.FsmName), [mutator]);
+                    }
                 }
             }
         }
@@ -38,7 +46,7 @@ public static class FsmMutatorPatch
     }
 
     [HarmonyPatch(typeof(PlayMakerFSM), nameof(PlayMakerFSM.OnEnable))]
-    [HarmonyPrefix]
+    [HarmonyPostfix]
     public static void OnFsmStart(PlayMakerFSM __instance)
     {
         _mutators ??= CollectMutators();
@@ -47,10 +55,14 @@ public static class FsmMutatorPatch
         if (__instance.fsm.FindBoolVariable(MutationTagVarName) != null)
             return;
 
-        if (_mutators.TryGetValue((__instance.gameObject.name, __instance.FsmName), out var mutator))
+        if (_mutators.TryGetValue((__instance.gameObject.name, __instance.FsmName), out var mutators))
         {
-            RebalancePlugin.Logger.LogDebug($"Applied mutation to {__instance.gameObject.name}:{__instance.FsmName}");
-            mutator(__instance.fsm);
+            foreach (var mutator in mutators)
+            {
+                
+                RebalancePlugin.Logger.LogDebug($"Applied mutator '{mutator.Method.DeclaringType!.Name}{mutator.Method.Name}' to {__instance.gameObject.name}: {__instance.FsmName}");
+                mutator(__instance.fsm);
+            }
             __instance.fsm.AddBoolVariable(MutationTagVarName);
         }
     }
