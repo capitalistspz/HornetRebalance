@@ -93,3 +93,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 ### Fractured Mask
 
 - Recovers after binding
+
+### Multibinder
+
+- Bind time reduced
