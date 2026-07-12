@@ -107,3 +107,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 
 - Any strand that enters the spool extender fills the entire extender
 
+### Reserve Bind
+
+- Reduced usage delay to almost the same as regular bind
+- Refilled when binding at full health
