@@ -6,6 +6,7 @@ using HarmonyLib;
 namespace Rebalance;
 
 [BepInAutoPlugin(id: "io.github.capitalistspz.rebalance")]
+[BepInDependency("org.silksong-modding.fsmutil")]
 public partial class RebalancePlugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger = null!;
