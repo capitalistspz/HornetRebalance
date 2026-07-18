@@ -55,14 +55,23 @@ public static class FsmMutatorPatch
         if (__instance.fsm.FindBoolVariable(MutationTagVarName) != null)
             return;
 
-        if (_mutators.TryGetValue((__instance.gameObject.name, __instance.FsmName), out var mutators))
+        if (!_mutators.TryGetValue((__instance.gameObject.name, __instance.FsmName), out var mutators)) 
+            return;
+        foreach (var mutator in mutators)
         {
-            foreach (var mutator in mutators)
+            var mutatorName = $"{mutator.Method.DeclaringType!.Name}.{mutator.Method.Name}";
+            var fsmName = $"{__instance.gameObject.name}: {__instance.FsmName}";
+            try
             {
-                RebalancePlugin.Logger.LogDebug($"Applying mutator '{mutator.Method.DeclaringType!.Name}.{mutator.Method.Name}' to {__instance.gameObject.name}: {__instance.FsmName}");
                 mutator(__instance.fsm);
+                RebalancePlugin.Logger.LogDebug(
+                    $"Applied mutator '{mutatorName}' to {fsmName}");
             }
-            __instance.fsm.AddBoolVariable(MutationTagVarName);
+            catch (InvalidOperationException e)
+            {
+                RebalancePlugin.Logger.LogError($"Failed to apply mutator '{mutator}' to {fsmName}: {e.Message}");
+            }
         }
+        __instance.fsm.AddBoolVariable(MutationTagVarName);
     }
 }
