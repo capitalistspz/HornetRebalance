@@ -111,3 +111,11 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 
 - Reduced usage delay to almost the same as regular bind
 - Refilled when binding at full health
+
+### Claw Mirror/Claw Mirrors
+- Increased damage
+- Triggers on craft bind as well as regular bind
+- 
+**Claw Mirror only**
+- Increased damage range to about the same as Claw Mirrors
+
