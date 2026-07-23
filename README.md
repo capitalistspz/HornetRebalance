@@ -129,3 +129,10 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 
 ### Volt Filament
 - Damage multiplier is now 1.2x (originally 1.25x)
+
+### Quick Sling
+- When the tool is duplicated:
+  - Consumes only one tool
+  - Both thrown tools do 70% of usual damage
+- Speed up Rosary Cannon and Silkshot (Architect) firing rate
+- Reduced cooldown on tools that don't get duplicated
