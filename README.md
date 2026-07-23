@@ -119,3 +119,7 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 **Claw Mirror only**
 - Increased damage range to about the same as Claw Mirrors
 
+### Memory Crystal
+- Increased damage
+- Spawns when a Needle Strike is performed
+

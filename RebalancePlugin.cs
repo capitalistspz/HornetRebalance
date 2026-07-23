@@ -7,6 +7,7 @@ namespace Rebalance;
 
 [BepInAutoPlugin(id: "io.github.capitalistspz.rebalance")]
 [BepInDependency("org.silksong-modding.fsmutil")]
+[BepInDependency("org.silksong-modding.assethelper")]
 public partial class RebalancePlugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger = null!;
@@ -14,8 +15,9 @@ public partial class RebalancePlugin : BaseUnityPlugin
 
     private void Awake()
     {
-        RebalancePlugin.Logger = base.Logger;
+        Logger = base.Logger;
         Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+        Assets.InitAll();
     }
 
     private void Start()
