@@ -126,3 +126,6 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 ### Snitch Pick
 - Creates new rosaries instead of taking them from enemy drops
 - Extra hit does the same amount of damage as the needle
+
+### Volt Filament
+- Damage multiplier is now 1.2x (originally 1.25x)
