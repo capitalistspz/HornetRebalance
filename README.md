@@ -123,3 +123,6 @@ Disclaimer: The full extent of my affiliation with Holland is as a regular viewe
 - Increased damage
 - Spawns when a Needle Strike is performed
 
+### Snitch Pick
+- Creates new rosaries instead of taking them from enemy drops
+- Extra hit does the same amount of damage as the needle
