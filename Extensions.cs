@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,9 +27,27 @@ public static class Extensions
         return null;
     }
 
-    public static GameObject? FindChildByPath(this GameObject gameObject, string path)
+    extension(GameObject gameObject)
     {
-        var ts = gameObject.transform.Find(path);
-        return ts == null ? null : ts.gameObject;
+        public GameObject? FindChildByPath(string path)
+        {
+            var ts = gameObject.transform.Find(path);
+            return ts == null ? null : ts.gameObject;
+        }
+
+        public string GetHierarchyPath()
+        {
+            if (!gameObject)
+                return String.Empty;
+            var transform = gameObject.transform;
+            var path = gameObject.name;
+            while (transform.parent)
+            {
+                transform = transform.parent;
+                path = $"{transform.name}/{path}";
+            }
+
+            return path;
+        }
     }
 }
