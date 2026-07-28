@@ -13,9 +13,6 @@ public static class AscendantsGrip
     [HarmonyPostfix]
     private static void IncreaseAttackRange(NailAttackBase __instance)
     {
-        // For Shaman Crest slash, presumably
-        if (__instance.overrideLongNeedleScale)
-            return;
         if (__instance.hc.cState.wallClinging && Gameplay.WallClingTool.IsEquipped)
         {
             var existingScale = __instance.transform.localScale;
