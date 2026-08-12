@@ -20,12 +20,7 @@ public static class ClawlineSilk
         }
 
         // Remove silk check
-        var canDoState = fsm.GetState("Can Do?");
-        if (canDoState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to get silk check state (Can Do?)");
-            return;
-        }
+        var canDoState = fsm.MustGetState("Can Do?");
 
         var cancelEvent = canDoState.GetTransition("CANCEL")?.FsmEvent;
         if (cancelEvent == null)
@@ -38,10 +33,7 @@ public static class ClawlineSilk
         {
             eventTarget = new FsmEventTarget
             {
-                gameObject = new FsmOwnerDefault
-                {
-                    gameObject = HeroController.instance.gameObject
-                }
+                gameObject = new FsmOwnerDefault()
             },
             sendEvent = cancelEvent,
             delay = 0,
@@ -51,8 +43,8 @@ public static class ClawlineSilk
         canDoState.ReplaceFirstActionOfType<IntCompare>(sendCancelEvent);
 
         // Remove silk removal
-        var takeControlState = fsm.GetState("Take Control");
-        takeControlState?.RemoveActionsOfType<TakeSilk>();
+        var takeControlState = fsm.MustGetState("Take Control");
+        takeControlState.RemoveActionsOfType<TakeSilk>();
 
         var harpoonDashDamagerGo = __instance.gameObject.FindChildByPath("Attacks/Harpoon Dash Damager");
         if (harpoonDashDamagerGo == null)

@@ -17,12 +17,7 @@ public static class InjectorBand
     [UsedImplicitly]
     public static void ChangeCooldown(Fsm fsm)
     {
-        var quickBindState = fsm.GetState("Quick Bind?");
-        if (quickBindState == null)
-        {
-            RebalancePlugin.Logger.LogError("Couldn't find Injector Band state");
-            return;
-        }
+        var quickBindState = fsm.MustGetState("Quick Bind?");
 
         var success = quickBindState.MutateFirstActionOfType<FloatMultiply>(action =>
         {
@@ -33,13 +28,8 @@ public static class InjectorBand
         if (!success) 
             RebalancePlugin.Logger.LogError("Couldn't set Injector Band bind time multiplier");
 
-        var quickCraftStartState = fsm.GetState("Quick Craft Start");
-        if (quickCraftStartState == null)
-        {
-            RebalancePlugin.Logger.LogError("Couldn't find craft bind state");
-            return;
-        }
-        
+        var quickCraftStartState = fsm.MustGetState("Quick Craft Start");
+
         var groundTestIndex = quickCraftStartState.IndexFirstActionMatching(action =>
         {
             if (action is BoolTest boolTest)

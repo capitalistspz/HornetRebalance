@@ -2,6 +2,7 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using JetBrains.Annotations;
 using Rebalance.FsmUtils;
+using Silksong.FsmUtil;
 
 namespace Rebalance.Patches.tools;
 
@@ -13,12 +14,7 @@ public static class Multibinder
     [UsedImplicitly]
     public static void ChangeCooldown(Fsm fsm)
     {
-        var multiBindState = fsm.GetState("Multi Bind");
-        if (multiBindState == null)
-        {
-            RebalancePlugin.Logger.LogError("Couldn't find Multi Bind state");
-            return;
-        }
+        var multiBindState = fsm.MustGetState("Multi Bind");
 
         var success = multiBindState.MutateFirstActionOfType<SetFloatValue>(action =>
         {
