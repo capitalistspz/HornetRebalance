@@ -26,12 +26,7 @@ public static class SawtoothCirclet
     [UsedImplicitly]
     public static void ReduceSound(Fsm fsm)
     {
-        var checkState = fsm.GetState("Check");
-        if (checkState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find sawtooth circlet cooldown check state");
-            return;
-        }
+        var checkState = fsm.MustGetState("Check");
 
         var audioEventAction = checkState.GetFirstActionOfType<PlayAudioEvent>();
         audioEventAction?.volume = 0.5f;

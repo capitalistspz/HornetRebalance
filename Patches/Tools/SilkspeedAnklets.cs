@@ -20,12 +20,7 @@ public static class SilkspeedAnklets
             return;
         }
 
-        var idleState = silkUsageFsm.GetState("Idle");
-        if (idleState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find silk usage FSM Idle state");
-            return;
-        }
+        var idleState = silkUsageFsm.MustGetState("Idle");
 
         var startUsageTransition = idleState.GetTransition("START SILK USAGE");
         if (startUsageTransition == null)

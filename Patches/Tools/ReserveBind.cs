@@ -16,35 +16,14 @@ public static class ReserveBind
     [UsedImplicitly]
     public static void ReduceChargeTimeAndMakeRestorable(Fsm fsm)
     {
-        #region "Get States"
-        var canBindState = fsm.GetState("Can Bind?");
-        if (canBindState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Can Bind? state");
-            return;
-        }
+        var canBindState = fsm.MustGetState("Can Bind?");
 
-        var endBindState = fsm.GetState("End Bind");
-        if (endBindState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Do Bind state");
-            return;
-        }
+        var endBindState = fsm.MustGetState("End Bind");
 
-        var reserveBindChargeState = fsm.GetState("Reserve Bind Charge");
-        if (reserveBindChargeState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Reserve Bind Charge state");
-            return;
-        }
+        var reserveBindChargeState = fsm.MustGetState("Reserve Bind Charge");
 
-        var reserveBindBurst = fsm.GetState("Reserve Bind Burst");
-        if (reserveBindBurst == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Reserve Bind Burst state");
-            return;
-        }
-        #endregion
+        var reserveBindBurst = fsm.MustGetState("Reserve Bind Burst");
+
         #region "Reduce Reserve Bind Delay"    
         reserveBindChargeState.ReplaceFirstActionOfType<Tk2dPlayAnimationWithEvents>(
             new Tk2dPlayAnimationWithEventsAtRate

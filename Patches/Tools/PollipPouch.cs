@@ -95,35 +95,14 @@ public static class PollipPouch
     public static void PlasmiumSynergy(Fsm fsm)
     {
         #region "State getting"
-        var startingIdleState = fsm.GetState("Starting Idle?");
+        var startingIdleState = fsm.MustGetState("Starting Idle?");
 
-        if (startingIdleState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find starting idle state in blue_health_display");
-            return;
-        }
+        var idleState = fsm.MustGetState("Idle");
 
-        var idleState = fsm.GetState("Idle");
-        if (idleState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find idle state in blue_health_display");
-            return;
-        }
-        
-        var frostedIdleState = fsm.GetState("Frosted Antic Idle");
-        if (frostedIdleState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find frosted idle state in blue_health_display");
-            return;
-        }
+        var frostedIdleState = fsm.MustGetState("Frosted Antic Idle");
 
-        var purpleBreakState = fsm.GetState("Purple Break?");
-        if (purpleBreakState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find purple break state in blue_health_display");
-            return;
-        }
-        
+        var purpleBreakState = fsm.MustGetState("Purple Break?");
+
         var boolTestIndex = startingIdleState.IndexLastActionOfType<BoolTest>();
         if (boolTestIndex == -1)
         {

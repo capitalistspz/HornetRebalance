@@ -13,12 +13,7 @@ public static class ScuttleBrace
     [HarmonyPostfix]
     private static void MakeInvulnerable(HeroController __instance)
     {
-        var scuttleStartState = __instance.toolsFSM.GetState("Scuttle Start");
-        if (scuttleStartState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Scuttle Start state");
-            return;
-        }
+        var scuttleStartState = __instance.toolsFSM.MustGetState("Scuttle Start");
         
         scuttleStartState.RemoveFirstActionMatching((action => action is SetHeroCState state && state.VariableName.Value == "evading"));
 

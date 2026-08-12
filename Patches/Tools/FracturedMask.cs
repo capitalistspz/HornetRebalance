@@ -13,12 +13,7 @@ public static class FracturedMask
     [UsedImplicitly]
     public static void RestoreOnBind(Fsm fsm)
     {
-        var endBindState = fsm.GetState("End Bind");
-        if (endBindState == null)
-        {
-            RebalancePlugin.Logger.LogError("Failed to find Do Bind state");
-            return;
-        }
+        var endBindState = fsm.MustGetState("End Bind");
         endBindState.AddMethod(() =>
         {
             if (Gameplay.FracturedMaskTool.IsEquipped)
