@@ -3,7 +3,23 @@
 A Hollow Knight: Silksong mod to rebalance Hornet as suggested
 in [Holland](https://www.youtube.com/channel/UCnVGHE75UsCcjCN2DlIOJLg)'s videos.
 
-## Build Instructions
+Contributions and forks are welcome as long as they comply with the [license](./LICENSE).
+
+## Install
+### Cogfly
+1. Select `Profiles`, 
+2. Select a profile
+3. Click `Import Manually` 
+4. Select `capitalistspz-Rebalance-<version>.zip`
+
+### r2modman
+1. Select `Hollow Knight: Silksong`
+2. Select a profile 
+3. Click `Settings`
+4. Click `Import local mod`
+5. Select `capitalistspz-Rebalance-<version>.zip`
+
+## Build
 ```bash
 dotnet build
 ```
