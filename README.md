@@ -6,18 +6,24 @@ in [Holland](https://www.youtube.com/channel/UCnVGHE75UsCcjCN2DlIOJLg)'s videos.
 Contributions and forks are welcome as long as they comply with the [license](./LICENSE).
 
 ## Install
-### Cogfly
-1. Select `Profiles`, 
+### Simple way
+1. Select a profile in your mod loader e.g. [Cogfly](https://github.com/Nix-main/Cogfly) or [r2modman](https://github.com/ebkr/r2modmanPlus)
+2. Search for this mod and click install
+
+### Manual
+0. Download the mod
+#### Cogfly
+1. Select `Profiles`
 2. Select a profile
 3. Click `Import Manually` 
-4. Select `capitalistspz-Rebalance-<version>.zip`
+4. Select `capitalists-Rebalance-<version>.zip`
 
-### r2modman
+#### r2modman
 1. Select `Hollow Knight: Silksong`
 2. Select a profile 
 3. Click `Settings`
 4. Click `Import local mod`
-5. Select `capitalistspz-Rebalance-<version>.zip`
+5. Select `capitalists-Rebalance-<version>.zip`
 
 ## Build
 ```bash
