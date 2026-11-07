@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using HutongGames.PlayMaker;
@@ -22,21 +23,30 @@ public static class FsmMutatorPatch
         stopwatch.Start();
         var mutators = new Dictionary<(string, string), List<Action<Fsm>>>();
         var assembly = Assembly.GetExecutingAssembly();
-        foreach (var type in assembly.GetTypes())
+        
+        foreach (var method in assembly.GetTypes().SelectMany(t => t.GetMethods()))
         {
-            foreach (var method in type.GetMethods())
+            var methodParams = method.GetParameters();
+            var badMethod = methodParams.Length == 0 || methodParams[0].ParameterType != typeof(Fsm) ||
+                            method.ReturnType != typeof(void);
+            
+            foreach (var attr in method.GetCustomAttributes<FsmMutatorAttribute>())
             {
-                foreach (var attr in method.GetCustomAttributes<FsmMutatorAttribute>())
+                if (badMethod)
                 {
-                    var mutator = (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method);
-                    if (mutators.TryGetValue((attr.ObjectName, attr.FsmName), out var list))
-                    {
-                        list.Add(mutator);   
-                    }
-                    else
-                    {
-                        mutators.Add((attr.ObjectName, attr.FsmName), [mutator]);
-                    }
+                    var mutatorName = $"{method.DeclaringType!.Name}.{method.Name}";
+                    RebalancePlugin.Logger.LogError($"Fsm mutator '{mutatorName}' has invalid signature");
+                    break;
+                }
+                    
+                var mutator = (Action<Fsm>)Delegate.CreateDelegate(typeof(Action<Fsm>), method);
+                if (mutators.TryGetValue((attr.ObjectName, attr.FsmName), out var list))
+                {
+                    list.Add(mutator);   
+                }
+                else
+                {
+                    mutators.Add((attr.ObjectName, attr.FsmName), [mutator]);
                 }
             }
         }
