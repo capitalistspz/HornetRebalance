@@ -177,3 +177,7 @@ dotnet build
     - Both thrown tools do 70% of usual damage
 - Speed up Rosary Cannon and Silkshot (Architect) firing rate
 - Reduced cooldown on tools that don't get duplicated
+
+### Weavelight
+
+- Increase silk regeneration speed
