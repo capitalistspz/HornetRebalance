@@ -181,3 +181,7 @@ dotnet build
 ### Weavelight
 
 - Increase silk regeneration speed
+
+### Egg of Flealia
+
+- Silk skill cost reduction is unconditional
