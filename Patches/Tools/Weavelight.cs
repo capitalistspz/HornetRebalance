@@ -10,8 +10,8 @@ public static class Weavelight
     
     [HarmonyPatch(typeof(Gameplay), nameof(Gameplay.Awake))]
     [HarmonyPostfix]
-    private static void IncreaseRegenSpeed(Gameplay gameplay)
+    private static void IncreaseRegenSpeed(Gameplay __instance)
     {
-        gameplay.whiteRingSilkRegenTimeMultiplier = RegenMultiplier;
+        __instance.whiteRingSilkRegenTimeMultiplier = RegenMultiplier;
     }
 }

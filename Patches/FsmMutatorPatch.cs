@@ -41,7 +41,7 @@ public static class FsmMutatorPatch
             }
         }
         stopwatch.Stop();
-        RebalancePlugin.Logger.LogInfo($"Collected {mutators.Count} fsm mutators in {stopwatch.ElapsedMilliseconds} ms");
+        RebalancePlugin.Logger.LogDebug($"Collected {mutators.Count} fsm mutators in {stopwatch.ElapsedMilliseconds} ms");
         return mutators;
     }
 
