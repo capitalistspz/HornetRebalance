@@ -185,3 +185,8 @@ dotnet build
 ### Egg of Flealia
 
 - Silk skill cost reduction is unconditional
+
+### Pin Badge
+
+- Charge time decreased to 0.75s
+- Needle strike damage increased by 15%
