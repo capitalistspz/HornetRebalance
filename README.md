@@ -191,7 +191,11 @@ dotnet build
 - Charge time decreased to 0.75s
 - Needle strike damage increased by 15%
 
-# Shell Satchel
+### Shell Satchel
 
 - No longer increases total tool count
 - Every 4 tool uses, the last tool used is replenished by 1
+
+### Magnetite Dice
+
+- Now only triggers after being hit after doing 20 successful attacks
