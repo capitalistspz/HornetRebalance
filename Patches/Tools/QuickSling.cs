@@ -6,6 +6,7 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using JetBrains.Annotations;
 using Rebalance.FsmUtils;
+using Rebalance.MiscUtils;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
 
@@ -55,11 +56,11 @@ public static class QuickSling
         return matcher.InstructionEnumeration();
     }
 
-    [HarmonyPatch(typeof(DamageEnemies), nameof(DamageEnemies.Start))]
-    [HarmonyPostfix]
-    private static void ReduceDamage(DamageEnemies __instance)
+    [DoDamageEnemiesHook]
+    [UsedImplicitly]
+    public static void ReduceDamage(DamageEnemies damageEnemies)
     {
-        var tool = __instance.RepresentingTool;
+        var tool = damageEnemies.RepresentingTool;
         if (tool == null)
             return;
         if (tool.Type != ToolItemType.Red)
@@ -68,7 +69,7 @@ public static class QuickSling
             return;
         if (DefaultUnaffectedToolNames.Contains(tool.name))
             return;
-        __instance.damageMultiplier *= DamageMultiplier;
+        damageEnemies.tempDamageStack.AddMultiplier(DamageMultiplier);
     }
 
     [FsmMutator("Hero_Hornet(Clone)", "Tool Attacks")]
