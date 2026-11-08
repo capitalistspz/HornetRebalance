@@ -190,3 +190,8 @@ dotnet build
 
 - Charge time decreased to 0.75s
 - Needle strike damage increased by 15%
+
+# Shell Satchel
+
+- No longer increases total tool count
+- Every 4 tool uses, the last tool used is replenished by 1
