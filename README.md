@@ -199,3 +199,13 @@ dotnet build
 ### Magnetite Dice
 
 - Now only triggers after being hit after doing 20 successful attacks
+
+### Spider Strings (Implemented but disabled in code)
+
+- Increase range Needolin range by 50%
+- Keeps enemies singing for a bit after Hornet stops playing
+- Enemy sing duration drops by one second each time the enemy is hit
+
+Disabled because it causes NPCs to sing forever until Hornet moves away.
+This is a serious problem with the Bell Beast as it doesn't stop singing when 
+trying to fast travel, making Hornet is unable to move or close the menu, softlocking the game. 
