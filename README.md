@@ -209,3 +209,7 @@ dotnet build
 Disabled because it causes NPCs to sing forever until Hornet moves away.
 This is a serious problem with the Bell Beast as it doesn't stop singing when 
 trying to fast travel, making Hornet is unable to move or close the menu, softlocking the game. 
+
+### Long Claw
+
+- Affects Needle Strikes
