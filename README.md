@@ -3,6 +3,10 @@
 A Hollow Knight: Silksong mod to rebalance Hornet as suggested
 in [Holland](https://www.youtube.com/channel/UCnVGHE75UsCcjCN2DlIOJLg)'s videos.
 
+Also check out [NordicMods' Rebalanced Crests](https://thunderstore.io/c/hollow-knight-silksong/p/NordicMods/RebalancedCrests/) for crest rebalancing.
+
+
+
 Contributions and forks are welcome as long as they comply with the [license](./LICENSE).
 
 ## Install
@@ -43,14 +47,6 @@ dotnet build
 ### Clawline
 
 - No longer requires or consumes silk
-
-## Crest Changes
-
-### Hunter
-
-- Down attack delay reduced
-- Taking damage with fully evolved Hunter's crest only drops focus down by the amount of hits required for focus 1 (6
-  points)
 
 ## Blue/Yellow Tool Changes
 
